@@ -16,7 +16,7 @@
             --text-secondary: #b8aeeb;
             --text-muted: #8a7ec4;
             --accent-purple: #7c5cfc;
-            --radius-video: 20px;
+            --radius-video: 16px;
             --radius-btn: 14px;
             --font-display: 'Orbitron', monospace;
             --font-body: 'Inter', sans-serif;
@@ -85,10 +85,11 @@
             width: 100%;
             padding: 6px 0 4px;
         }
+        /* ── THUMBNAIL: LANDSCAPE (mas maliit) ── */
         .video-wrapper {
             position: relative;
             width: 100%;
-            max-width: 600px;
+            max-width: 420px; /* same as container */
             aspect-ratio: 16 / 9;
             border-radius: var(--radius-video);
             overflow: hidden;
@@ -105,7 +106,7 @@
         .video-wrapper img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* crop to landscape */
             display: block;
         }
         .video-wrapper::before {
@@ -114,7 +115,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 4rem;
+            font-size: 3.5rem;
             color: rgba(255, 255, 255, 0.85);
             text-shadow: 0 0 40px rgba(120, 80, 255, 0.6);
             opacity: 0.9;
@@ -126,6 +127,7 @@
             opacity: 1;
             transform: translate(-50%, -50%) scale(1.1);
         }
+
         .profile-title {
             margin-top: 14px;
             font-family: var(--font-body);
@@ -299,6 +301,7 @@
             transform: translateX(-50%) translateY(0);
             pointer-events: auto;
         }
+        /* ── MODAL: PORTRAIT (malaki pag-click) ── */
         .video-modal {
             position: fixed;
             inset: 0;
@@ -340,9 +343,9 @@
         }
         .video-modal .modal-video-wrapper {
             position: relative;
-            width: 90%;
-            max-width: 900px;
-            aspect-ratio: 16/9;
+            width: 85%;
+            max-width: 420px; /* laki ng portrait */
+            aspect-ratio: 9 / 16;
             border-radius: var(--radius-video);
             overflow: hidden;
             border: 2px solid rgba(120,80,255,0.3);
@@ -363,15 +366,24 @@
             width: 1px;
             height: 1px;
         }
+        /* ── Responsive ── */
         @media (max-width:430px) {
+            .video-wrapper { max-width: 100%; }
             .video-wrapper::before { font-size:3rem; }
             .video-modal .modal-close { top:12px; right:16px; width:36px; height:36px; font-size:1.3rem; }
+            .video-modal .modal-video-wrapper { width: 90%; max-width: 360px; }
         }
         @media (max-width:375px) {
             .video-wrapper::before { font-size:2.5rem; }
+            .video-modal .modal-video-wrapper { width: 92%; max-width: 320px; }
         }
         @media (max-width:320px) {
             .video-wrapper::before { font-size:2rem; }
+            .video-modal .modal-video-wrapper { width: 95%; max-width: 280px; }
+        }
+        @media (min-width:600px) {
+            .video-wrapper { max-width: 500px; }
+            .video-modal .modal-video-wrapper { max-width: 480px; }
         }
     </style>
 </head>
@@ -402,8 +414,8 @@
     <main class="container">
 
         <section class="profile-section">
+            <!-- Thumbnail: Landscape at saktong laki lang -->
             <div class="video-wrapper" id="videoTrigger" role="button" tabindex="0">
-                <!-- Thumbnail: Puwede ninyong palitan ng sarili ninyong image -->
                 <img
                     src="https://media.discordapp.net/attachments/1531657827859566795/1545695038351347762/ChatGPT_Image_Sep_5_2026_03_19_57_PM.png?ex=6a9d142e&is=6a9bc2ae&hm=e5d73c462dc79c81c5000d1f2be49e91e27a8b4a7587fb81f91c7f211cc7acae&=&format=webp&quality=lossless"
                     alt="Tutorial video thumbnail"
@@ -463,8 +475,6 @@
 
             const PROFILE_URL = 'https://bio.site/Ilovebacons';
             const TOAST_DURATION = 3200;
-
-            // ✅ BAGONG VIMEO VIDEO ID
             const VIMEO_ID = '1224189997';
 
             const copyBtn = document.getElementById('copyBtn');
