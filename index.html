@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Join My Roblox</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ── Reset & Base ── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0b0814;
+            --bg-card: #14101f;
+            --bg-card-hover: #1c1630;
+            --border-glow: rgba(120, 80, 255, 0.35);
+            --border-glow-strong: rgba(120, 80, 255, 0.7);
+            --text-primary: #f0ecff;
+            --text-secondary: #b8aeeb;
+            --text-muted: #8a7ec4;
+            --accent-purple: #7c5cfc;
+            --accent-blue: #4a7aff;
+            --accent-pink: #c05aff;
+            --glow-purple: 0 0 30px rgba(120, 80, 255, 0.25);
+            --glow-blue: 0 0 30px rgba(74, 122, 255, 0.2);
+            --radius-card: 18px;
+            --radius-btn: 14px;
+            --radius-video: 20px;
+            --font-display: 'Orbitron', monospace;
+            --font-body: 'Inter', sans-serif;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ── Background with uploaded image ── */
+        body {
+            font-family: var(--font-body);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px 16px 40px;
+            /* 
+                ═══════════════════════════════════════════════
+                IMPORTANT: Replace 'background.png' with the 
+                path to your uploaded PNG image.
+                ═══════════════════════════════════════════════
+            */
+            background-image: url('background.png'), linear-gradient(135deg, #0b0814, #1a1040);
+            background-size: cover, cover;
+            background-position: center, center;
+            background-attachment: fixed, fixed;
+            background-repeat: no-repeat, no-repeat;
+            position: relative;
+        }
+
+        /* Dark overlay for readability */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(11, 8, 20, 0.65);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Sparkles overlay */
+        .sparkles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .sparkle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #c8b0ff;
+            border-radius: 50%;
+            box-shadow: 0 0 6px 1px rgba(160, 120, 255, 0.5);
+            animation: twinkle var(--dur, 4s) ease-in-out infinite alternate;
+            opacity: 0;
+        }
+        @keyframes twinkle {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+        }
+
+        /* ── Main Container ── */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 420px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        /* ── Profile / Video Section ── */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 6px 0 4px;
+        }
+
+        /* Wide landscape video wrapper - clickable */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            aspect-ratio: 16 / 9;
+            border-radius: var(--radius-video);
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow:
+                0 0 20px rgba(120, 80, 255, 0.2),
+                0 0 60px rgba(120, 80, 255, 0.08),
+                inset 0 0 30px rgba(120, 80, 255, 0.05);
+            border: 2px solid rgba(120, 80, 255, 0.3);
+            transition: box-shadow var(--transition), border-color var(--transition), transform 0.2s ease;
+            background: #0e0a1a;
+            cursor: pointer;
+        }
+        .video-wrapper:hover {
+            border-color: rgba(120, 80, 255, 0.6);
+            box-shadow:
+                0 0 30px rgba(120, 80, 255, 0.3),
+                0 0 80px rgba(120, 80, 255, 0.12),
+                inset 0 0 30px rgba(120, 80, 255, 0.08);
+            transform: scale(1.01);
+        }
+        .video-wrapper:active {
+            transform: scale(0.98);
+        }
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* keep original aspect ratio, no crop */
+            display: block;
+            pointer-events: none; /* prevents native controls from interfering with click */
+        }
+        /* subtle inner glow ring */
+        .video-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: var(--radius-video);
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(120, 80, 255, 0.2), transparent 40%, transparent 60%, rgba(74, 122, 255, 0.15));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        /* Play icon overlay hint */
+        .video-wrapper::before {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-shadow: 0 0 30px rgba(120, 80, 255, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 2;
+            font-weight: 100;
+        }
+        .video-wrapper:hover::before {
+            opacity: 0.8;
+        }
+
+        .profile-title {
+            margin-top: 14px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            text-align: center;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #f0ecff 0%, #b8aeeb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(120, 80, 255, 0.15);
+            padding: 0 4px;
+            line-height: 1.3;
+        }
+        .profile-title span {
+            font-weight: 900;
+            background: linear-gradient(135deg, #a88aff, #7c5cfc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── Join Me Below ── */
+        .join-cta {
+            width: 100%;
+            margin-top: 2px;
+        }
+        .join-cta .btn-join {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px 20px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            background: rgba(20, 16, 31, 0.6);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(120, 80, 255, 0.2);
+            border-radius: var(--radius-btn);
+            cursor: default;
+            transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+            box-shadow: 0 0 20px rgba(120, 80, 255, 0.06);
+            text-decoration: none;
+            user-select: none;
+        }
+        .join-cta .btn-join .arrow {
+            display: inline-block;
+            font-size: 1.3rem;
+            line-height: 1;
+            animation: bobDown 1.8s ease-in-out infinite;
+            color: var(--accent-purple);
+        }
+        @keyframes bobDown {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(6px);
+            }
+        }
+
+        /* ── Roblox Profile Button ── */
+        .roblox-btn-wrap {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-roblox {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 20px 18px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.03em;
+            color: #fff;
+            background: rgba(42, 26, 74, 0.85);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1.5px solid rgba(120, 80, 255, 0.3);
+            border-radius: var(--radius-btn);
+            cursor: pointer;
+            transition: all var(--transition);
+            box-shadow: 0 4px 24px rgba(120, 80, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+        .btn-roblox::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-btn);
+            padding: 1.5px;
+            background: linear-gradient(135deg, rgba(120, 80, 255, 0.4), transparent 50%, rgba(74, 122, 255, 0.3));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.6;
+            transition: opacity var(--transition);
+        }
+        .btn-roblox:hover {
+            transform: translateY(-2px);
+            background: rgba(53, 34, 90, 0.9);
+            border-color: rgba(120, 80, 255, 0.5);
+            box-shadow: 0 8px 40px rgba(120, 80, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+        .btn-roblox:active {
+            transform: scale(0.97);
+            transition-duration: 0.08s;
+        }
+        .btn-roblox .icon {
+            font-size: 1.5rem;
+            line-height: 1;
+            filter: drop-shadow(0 0 8px rgba(120, 80, 255, 0.3));
+        }
+
+        .btn-subnote {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 0 4px;
+            line-height: 1.4;
+            opacity: 0.8;
+            margin-top: -2px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        /* ── OR Divider ── */
+        .divider-or {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 2px 0;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            gap: 10px;
+            user-select: none;
+        }
+        .divider-or .line {
+            flex: 1;
+            max-width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(120, 80, 255, 0.25), transparent);
+        }
+        .divider-or .line:first-child {
+            background: linear-gradient(90deg, transparent, rgba(120, 80, 255, 0.25));
+        }
+        .divider-or .line:last-child {
+            background: linear-gradient(90deg, rgba(120, 80, 255, 0.25), transparent);
+        }
+        .divider-or .or-text {
+            padding: 0 4px;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+        }
+
+        /* ── Copy Button ── */
+        .btn-copy {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 20px 18px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            color: var(--text-primary);
+            background: rgba(20, 16, 31, 0.7);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1.5px solid rgba(120, 80, 255, 0.15);
+            border-radius: var(--radius-btn);
+            cursor: pointer;
+            transition: all var(--transition);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+        .btn-copy:hover {
+            background: rgba(30, 24, 50, 0.8);
+            border-color: rgba(120, 80, 255, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 30px rgba(120, 80, 255, 0.08);
+        }
+        .btn-copy:active {
+            transform: scale(0.97);
+            transition-duration: 0.08s;
+        }
+        .btn-copy .copy-icon {
+            font-size: 1.3rem;
+            line-height: 1;
+            opacity: 0.7;
+        }
+        .btn-copy .label {
+            font-weight: 500;
+        }
+        .btn-copy .label strong {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* ── QR Section ── */
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 6px 0 4px;
+            gap: 10px;
+        }
+        .qr-section .qr-image {
+            width: 180px;
+            max-width: 65%;
+            height: auto;
+            aspect-ratio: 1/1;
+            border-radius: 16px;
+            background: rgba(14, 10, 26, 0.7);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            padding: 8px;
+            border: 1px solid rgba(120, 80, 255, 0.12);
+            box-shadow: 0 0 30px rgba(120, 80, 255, 0.04);
+            transition: box-shadow var(--transition), border-color var(--transition);
+            display: block;
+        }
+        .qr-section .qr-image:hover {
+            border-color: rgba(120, 80, 255, 0.25);
+            box-shadow: 0 0 40px rgba(120, 80, 255, 0.08);
+        }
+        .qr-section .qr-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 10px;
+            background: #fff;
+        }
+        .qr-label {
+            font-family: var(--font-body);
+            font-weight: 400;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            opacity: 0.7;
+            text-align: center;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        /* ── Toast / Notification ── */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: rgba(20, 16, 31, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 14px 24px;
+            border-radius: 14px;
+            border: 1px solid rgba(120, 80, 255, 0.25);
+            box-shadow: 0 8px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(120, 80, 255, 0.06);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-align: center;
+            max-width: 90%;
+            width: auto;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+            white-space: nowrap;
+            letter-spacing: 0.01em;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+        .toast .toast-icon {
+            margin-right: 8px;
+        }
+
+        /* ── VIDEO MODAL ── */
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .video-modal.open {
+            display: flex;
+            opacity: 1;
+        }
+        .video-modal .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 300;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+            line-height: 1;
+            padding: 0;
+        }
+        .video-modal .modal-close:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: rotate(90deg);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .video-modal .modal-video-wrapper {
+            position: relative;
+            width: 90%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            border-radius: var(--radius-video);
+            overflow: hidden;
+            box-shadow: 0 0 60px rgba(120, 80, 255, 0.2), 0 0 120px rgba(120, 80, 255, 0.05);
+            border: 2px solid rgba(120, 80, 255, 0.3);
+            background: #000;
+        }
+        .video-modal .modal-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 430px) {
+            body {
+                padding: 16px 14px 32px;
+            }
+            .video-wrapper {
+                border-radius: 16px;
+            }
+            .video-wrapper::after {
+                border-radius: 16px;
+            }
+            .profile-title {
+                font-size: 0.95rem;
+                margin-top: 12px;
+            }
+            .btn-roblox {
+                font-size: 0.9rem;
+                padding: 18px 14px;
+            }
+            .btn-copy {
+                font-size: 0.85rem;
+                padding: 18px 14px;
+            }
+            .join-cta .btn-join {
+                font-size: 0.85rem;
+                padding: 14px 16px;
+            }
+            .qr-section .qr-image {
+                width: 150px;
+                max-width: 60%;
+            }
+            .toast {
+                font-size: 0.75rem;
+                padding: 12px 18px;
+                white-space: normal;
+                max-width: 92%;
+            }
+            .video-modal .modal-close {
+                top: 12px;
+                right: 16px;
+                width: 36px;
+                height: 36px;
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 375px) {
+            body {
+                padding: 12px 10px 28px;
+            }
+            .video-wrapper {
+                border-radius: 14px;
+            }
+            .video-wrapper::after {
+                border-radius: 14px;
+            }
+            .profile-title {
+                font-size: 0.8rem;
+                margin-top: 10px;
+            }
+            .btn-roblox {
+                font-size: 0.8rem;
+                padding: 16px 12px;
+                gap: 8px;
+            }
+            .btn-roblox .icon {
+                font-size: 1.2rem;
+            }
+            .btn-copy {
+                font-size: 0.75rem;
+                padding: 16px 12px;
+                gap: 8px;
+            }
+            .join-cta .btn-join {
+                font-size: 0.75rem;
+                padding: 12px 14px;
+                gap: 6px;
+            }
+            .join-cta .btn-join .arrow {
+                font-size: 1rem;
+            }
+            .divider-or {
+                font-size: 0.6rem;
+            }
+            .divider-or .line {
+                max-width: 40px;
+            }
+            .qr-section .qr-image {
+                width: 130px;
+                max-width: 55%;
+                padding: 6px;
+            }
+            .btn-subnote {
+                font-size: 0.6rem;
+            }
+            .qr-label {
+                font-size: 0.6rem;
+            }
+            .toast {
+                font-size: 0.7rem;
+                padding: 10px 14px;
+                bottom: 20px;
+            }
+            .video-modal .modal-close {
+                top: 10px;
+                right: 12px;
+                width: 32px;
+                height: 32px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            body {
+                padding: 10px 8px 24px;
+            }
+            .video-wrapper {
+                border-radius: 12px;
+            }
+            .video-wrapper::after {
+                border-radius: 12px;
+            }
+            .profile-title {
+                font-size: 0.7rem;
+                margin-top: 8px;
+            }
+            .btn-roblox {
+                font-size: 0.7rem;
+                padding: 14px 10px;
+                gap: 6px;
+                border-radius: 12px;
+            }
+            .btn-roblox .icon {
+                font-size: 1rem;
+            }
+            .btn-copy {
+                font-size: 0.65rem;
+                padding: 14px 10px;
+                gap: 6px;
+                border-radius: 12px;
+            }
+            .join-cta .btn-join {
+                font-size: 0.65rem;
+                padding: 10px 12px;
+                gap: 4px;
+                border-radius: 12px;
+            }
+            .join-cta .btn-join .arrow {
+                font-size: 0.9rem;
+            }
+            .divider-or {
+                font-size: 0.55rem;
+                gap: 6px;
+            }
+            .divider-or .line {
+                max-width: 30px;
+            }
+            .qr-section .qr-image {
+                width: 110px;
+                max-width: 50%;
+                padding: 4px;
+                border-radius: 12px;
+            }
+            .btn-subnote {
+                font-size: 0.55rem;
+            }
+            .qr-label {
+                font-size: 0.55rem;
+            }
+            .container {
+                gap: 14px;
+            }
+            .toast {
+                font-size: 0.6rem;
+                padding: 8px 12px;
+                bottom: 16px;
+                max-width: 96%;
+            }
+            .video-modal .modal-close {
+                top: 8px;
+                right: 10px;
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
+            }
+        }
+
+        /* ── Desktop tweaks ── */
+        @media (min-width: 600px) {
+            body {
+                padding: 40px 20px 60px;
+                align-items: center;
+            }
+            .container {
+                max-width: 460px;
+            }
+            .video-wrapper {
+                max-width: 600px;
+            }
+            .profile-title {
+                font-size: 1.3rem;
+            }
+            .btn-roblox {
+                font-size: 1.1rem;
+                padding: 22px 24px;
+            }
+            .btn-copy {
+                font-size: 1rem;
+                padding: 22px 24px;
+            }
+            .join-cta .btn-join {
+                font-size: 1.05rem;
+                padding: 18px 24px;
+            }
+            .qr-section .qr-image {
+                width: 200px;
+                max-width: 50%;
+            }
+        }
+
+        /* ── Utilities ── */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .copy-fallback {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            opacity: 0;
+            pointer-events: none;
+            width: 1px;
+            height: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ SPARKLES ═══ -->
+    <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+
+    <!-- ═══ TOAST ═══ -->
+    <div class="toast" id="toast" role="alert" aria-live="polite">
+        <span class="toast-icon">✅</span>
+        <span id="toastMessage">Already Copied! Paste it On any Browser and join</span>
+    </div>
+
+    <!-- ═══ VIDEO MODAL ═══ -->
+    <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Tutorial video">
+        <button class="modal-close" id="modalClose" aria-label="Close video">&times;</button>
+        <div class="modal-video-wrapper">
+            <video id="modalVideo" controls autoplay playsinline muted>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <!-- ═══ MAIN CONTAINER ═══ -->
+    <main class="container">
+
+        <!-- ── Profile Section ── -->
+        <section class="profile-section" aria-label="Profile and tutorial">
+            <!-- Clickable video wrapper (opens modal) -->
+            <div class="video-wrapper" id="videoTrigger" role="button" tabindex="0" aria-label="Play tutorial video">
+                <video
+                    id="mainVideo"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%2314101f'/%3E%3Ccircle cx='100' cy='100' r='60' fill='%237c5cfc' opacity='0.15'/%3E%3Cpath d='M80 70 L80 130 L130 100 Z' fill='%237c5cfc' opacity='0.4'/%3E%3C/svg%3E"
+                >
+                    <!-- Replace the src with your own tutorial video -->
+                    <source src="https://media.discordapp.net/attachments/1531657827859566795/1545666827042947082/ChatGPT_Image_Sep_5_2026_12_18_23_PM.png?ex=6a9cf9e8&is=6a9ba868&hm=d7d73d99c656bde61b8f725b29694fb4d114891879e3cbef85be7f3f738a2bf1&=&format=webp&quality=lossless&width=1024&height=1024" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <h1 class="profile-title">
+                Tutorial <span>how</span> to <span>join</span>
+            </h1>
+        </section>
+
+        <!-- ── JOIN ME BELOW ── -->
+        <div class="join-cta">
+            <div class="btn-join" aria-hidden="true">
+                JOIN ME BELOW
+                <span class="arrow">↓</span>
+            </div>
+        </div>
+
+        <!-- ── ROBLOX PROFILE BUTTON ── -->
+        <div class="roblox-btn-wrap">
+            <a
+                class="btn-roblox"
+                id="robloxProfileBtn"
+                href="https://www.roblox.com/users/123456789/profile"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open my Roblox profile in a new tab"
+            >
+                <span class="icon">🎮</span>
+                MY ROBLOX PROFILE
+            </a>
+            <div class="btn-subnote">
+                to join watch the video tutorial above
+            </div>
+        </div>
+
+        <!-- ── OR DIVIDER 1 ── -->
+        <div class="divider-or" aria-hidden="true">
+            <span class="line"></span>
+            <span class="or-text">OR</span>
+            <span class="line"></span>
+        </div>
+
+        <!-- ── COPY PROFILE LINK BUTTON ── -->
+        <button class="btn-copy" id="copyBtn" aria-label="Copy my Roblox profile link to clipboard">
+            <span class="copy-icon">📋</span>
+            <span class="label"><strong>join me</strong> thru copy my profile link</span>
+        </button>
+
+        <!-- hidden fallback input for copy -->
+        <input class="copy-fallback" id="copyFallback" type="text" value="https://www.roblox.com/users/123456789/profile" readonly aria-hidden="true" />
+
+        <!-- ── OR DIVIDER 2 ── -->
+        <div class="divider-or" aria-hidden="true">
+            <span class="line"></span>
+            <span class="or-text">OR</span>
+            <span class="line"></span>
+        </div>
+
+        <!-- ── QR CODE SECTION ── -->
+        <section class="qr-section" aria-label="QR code to join">
+            <div class="qr-image">
+                <!-- QR code generated from the Roblox profile URL -->
+                <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fwww.roblox.com%2Fusers%2F123456789%2Fprofile&bgcolor=ffffff&color=1a1040&margin=12"
+                    alt="QR code to scan and join my Roblox profile"
+                    width="300"
+                    height="300"
+                    loading="lazy"
+                />
+            </div>
+            <div class="qr-label">scan the qr to join</div>
+        </section>
+
+    </main>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ── Config ──
+            const PROFILE_URL = 'https://www.roblox.com/users/123456789/profile';
+            const TOAST_DURATION = 3200; // ms
+
+            // ── DOM refs ──
+            const copyBtn = document.getElementById('copyBtn');
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            const fallbackInput = document.getElementById('copyFallback');
+
+            // Video Modal refs
+            const videoTrigger = document.getElementById('videoTrigger');
+            const videoModal = document.getElementById('videoModal');
+            const modalClose = document.getElementById('modalClose');
+            const modalVideo = document.getElementById('modalVideo');
+            const mainVideo = document.getElementById('mainVideo');
+
+            // ── Toast helpers ──
+            let toastTimer = null;
+
+            function showToast(message) {
+                if (toastTimer) {
+                    clearTimeout(toastTimer);
+                    toastTimer = null;
+                }
+                toastMsg.textContent = message || 'Already Copied! Paste it On any Browser and join';
+                toast.classList.add('show');
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                    toastTimer = null;
+                }, TOAST_DURATION);
+            }
+
+            function hideToast() {
+                if (toastTimer) {
+                    clearTimeout(toastTimer);
+                    toastTimer = null;
+                }
+                toast.classList.remove('show');
+            }
+
+            // ── Copy logic ──
+            function copyProfileLink() {
+                hideToast();
+
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(PROFILE_URL)
+                        .then(() => {
+                            showToast('Already Copied! Paste it On any Browser and join');
+                        })
+                        .catch(() => {
+                            fallbackCopy();
+                        });
+                    return;
+                }
+                fallbackCopy();
+            }
+
+            function fallbackCopy() {
+                try {
+                    fallbackInput.value = PROFILE_URL;
+                    fallbackInput.select();
+                    fallbackInput.setSelectionRange(0, 99999);
+
+                    const success = document.execCommand('copy');
+                    if (success) {
+                        showToast('Already Copied! Paste it On any Browser and join');
+                    } else {
+                        manualCopyFallback();
+                    }
+                } catch (e) {
+                    manualCopyFallback();
+                }
+                if (window.getSelection) {
+                    window.getSelection().removeAllRanges();
+                }
+                fallbackInput.blur();
+            }
+
+            function manualCopyFallback() {
+                const msg = `Copy this link: ${PROFILE_URL}`;
+                showToast(msg);
+                console.log('Manual copy needed:', PROFILE_URL);
+            }
+
+            // ── Video Modal Logic ──
+            function openModal() {
+                // Get the current src from the main video
+                const currentSrc = mainVideo.querySelector('source')?.getAttribute('src') || '';
+                const modalSource = modalVideo.querySelector('source');
+                if (modalSource) {
+                    modalSource.setAttribute('src', currentSrc);
+                }
+                modalVideo.load();
+                // Play the modal video
+                modalVideo.play().catch(() => { /* autoplay may fail, but controls are there */ });
+                videoModal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                videoModal.classList.remove('open');
+                modalVideo.pause();
+                // Remove src to release resources
+                const modalSource = modalVideo.querySelector('source');
+                if (modalSource) {
+                    modalSource.removeAttribute('src');
+                }
+                modalVideo.load();
+                document.body.style.overflow = '';
+            }
+
+            // Open modal on video trigger click
+            videoTrigger.addEventListener('click', openModal);
+            videoTrigger.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openModal();
+                }
+            });
+
+            // Close modal on close button
+            modalClose.addEventListener('click', closeModal);
+
+            // Close modal on backdrop click
+            videoModal.addEventListener('click', function(e) {
+                if (e.target === videoModal) {
+                    closeModal();
+                }
+            });
+
+            // Close modal on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && videoModal.classList.contains('open')) {
+                    closeModal();
+                }
+            });
+
+            // ── Copy Button Events ──
+            copyBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                copyProfileLink();
+            });
+
+            copyBtn.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    copyProfileLink();
+                }
+            });
+
+            // ── Toast close on click ──
+            toast.addEventListener('click', function() {
+                hideToast();
+            });
+
+            // ── Sparkles ──
+            function generateSparkles() {
+                const container = document.getElementById('sparkles');
+                const count = 45;
+                for (let i = 0; i < count; i++) {
+                    const el = document.createElement('div');
+                    el.className = 'sparkle';
+                    const x = Math.random() * 100;
+                    const y = Math.random() * 100;
+                    const size = 1.5 + Math.random() * 3;
+                    const dur = 3 + Math.random() * 5;
+                    const delay = Math.random() * 6;
+                    el.style.cssText = `
+                        left: ${x}%;
+                        top: ${y}%;
+                        width: ${size}px;
+                        height: ${size}px;
+                        --dur: ${dur}s;
+                        animation-delay: ${delay}s;
+                        opacity: ${0.2 + Math.random() * 0.5};
+                    `;
+                    container.appendChild(el);
+                }
+            }
+            generateSparkles();
+
+            console.log('🚀 Roblox Join Page ready. Profile URL:', PROFILE_URL);
+
+        })();
+    </script>
+
+</body>
+</html>
