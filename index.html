@@ -4,54 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Join My Roblox</title>
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
     <style>
         /* ── Reset & Base ── */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
         :root {
             --bg-primary: #0b0814;
-            --bg-card: #14101f;
-            --bg-card-hover: #1c1630;
-            --border-glow: rgba(120, 80, 255, 0.35);
-            --border-glow-strong: rgba(120, 80, 255, 0.7);
             --text-primary: #f0ecff;
             --text-secondary: #b8aeeb;
             --text-muted: #8a7ec4;
             --accent-purple: #7c5cfc;
-            --accent-blue: #4a7aff;
-            --accent-pink: #c05aff;
-            --glow-purple: 0 0 30px rgba(120, 80, 255, 0.25);
-            --glow-blue: 0 0 30px rgba(74, 122, 255, 0.2);
-            --radius-card: 18px;
-            --radius-btn: 14px;
             --radius-video: 20px;
+            --radius-btn: 14px;
             --font-display: 'Orbitron', monospace;
             --font-body: 'Inter', sans-serif;
             --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        html {
-            font-size: 16px;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* ── Background with uploaded image ── */
+        html { font-size:16px; -webkit-tap-highlight-color:transparent; }
         body {
             font-family: var(--font-body);
             min-height: 100vh;
-            min-height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -60,23 +34,17 @@
             background-size: cover, cover;
             background-position: center, center;
             background-attachment: fixed, fixed;
-            background-repeat: no-repeat, no-repeat;
             position: relative;
         }
-
-        /* Dark overlay for readability */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
             background: rgba(11, 8, 20, 0.65);
             backdrop-filter: blur(1px);
-            -webkit-backdrop-filter: blur(1px);
             z-index: 0;
             pointer-events: none;
         }
-
-        /* Sparkles overlay */
         .sparkles {
             position: fixed;
             inset: 0;
@@ -95,21 +63,10 @@
             opacity: 0;
         }
         @keyframes twinkle {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2);
-            }
-            100% {
-                opacity: 0.3;
-                transform: scale(0.8);
-            }
+            0% { opacity:0; transform:scale(0.5); }
+            50% { opacity:1; transform:scale(1.2); }
+            100% { opacity:0.3; transform:scale(0.8); }
         }
-
-        /* ── Main Container ── */
         .container {
             position: relative;
             z-index: 2;
@@ -121,8 +78,6 @@
             align-items: center;
             gap: 18px;
         }
-
-        /* ── Profile / Video Section ── */
         .profile-section {
             display: flex;
             flex-direction: column;
@@ -130,8 +85,6 @@
             width: 100%;
             padding: 6px 0 4px;
         }
-
-        /* Wide landscape video wrapper - clickable */
         .video-wrapper {
             position: relative;
             width: 100%;
@@ -139,45 +92,21 @@
             aspect-ratio: 16 / 9;
             border-radius: var(--radius-video);
             overflow: hidden;
-            flex-shrink: 0;
-            box-shadow:
-                0 0 20px rgba(120, 80, 255, 0.2),
-                0 0 60px rgba(120, 80, 255, 0.08),
-                inset 0 0 30px rgba(120, 80, 255, 0.05);
             border: 2px solid rgba(120, 80, 255, 0.3);
-            transition: box-shadow var(--transition), border-color var(--transition), transform 0.2s ease;
-            background: #0e0a1a;
+            box-shadow: 0 0 20px rgba(120, 80, 255, 0.2);
             cursor: pointer;
+            transition: transform 0.2s;
+            background: #0e0a1a;
         }
         .video-wrapper:hover {
-            border-color: rgba(120, 80, 255, 0.6);
-            box-shadow:
-                0 0 30px rgba(120, 80, 255, 0.3),
-                0 0 80px rgba(120, 80, 255, 0.12),
-                inset 0 0 30px rgba(120, 80, 255, 0.08);
             transform: scale(1.01);
+            border-color: rgba(120, 80, 255, 0.6);
         }
-        .video-wrapper:active {
-            transform: scale(0.98);
-        }
-        .video-wrapper video {
+        .video-wrapper img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             display: block;
-            pointer-events: none;
-        }
-        .video-wrapper::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: var(--radius-video);
-            padding: 2px;
-            background: linear-gradient(135deg, rgba(120, 80, 255, 0.2), transparent 40%, transparent 60%, rgba(74, 122, 255, 0.15));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
         }
         .video-wrapper::before {
             content: '▶';
@@ -185,42 +114,32 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.6);
-            text-shadow: 0 0 30px rgba(120, 80, 255, 0.5);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 0 40px rgba(120, 80, 255, 0.6);
+            opacity: 0.9;
+            transition: opacity 0.3s;
             pointer-events: none;
             z-index: 2;
-            font-weight: 100;
         }
         .video-wrapper:hover::before {
-            opacity: 0.8;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
         }
-
-        /* ── NEW: Smaller title text ── */
         .profile-title {
             margin-top: 14px;
             font-family: var(--font-body);
             font-weight: 500;
             font-size: 0.85rem;
-            letter-spacing: 0.04em;
             text-align: center;
             color: var(--text-secondary);
-            padding: 0 4px;
-            line-height: 1.4;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+            text-shadow: 0 2px 12px rgba(0,0,0,0.6);
         }
         .profile-title span {
             font-weight: 600;
             color: var(--accent-purple);
         }
-
-        /* ── Join Me Below ── */
-        .join-cta {
-            width: 100%;
-            margin-top: 2px;
-        }
+        .join-cta { width:100%; margin-top:2px; }
         .join-cta .btn-join {
             display: flex;
             align-items: center;
@@ -231,38 +150,24 @@
             font-family: var(--font-display);
             font-weight: 600;
             font-size: 1rem;
-            letter-spacing: 0.04em;
             text-transform: uppercase;
             color: var(--text-primary);
             background: rgba(20, 16, 31, 0.6);
             backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
             border: 1px solid rgba(120, 80, 255, 0.2);
             border-radius: var(--radius-btn);
             cursor: default;
-            transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
-            box-shadow: 0 0 20px rgba(120, 80, 255, 0.06);
-            text-decoration: none;
-            user-select: none;
         }
         .join-cta .btn-join .arrow {
             display: inline-block;
             font-size: 1.3rem;
-            line-height: 1;
             animation: bobDown 1.8s ease-in-out infinite;
             color: var(--accent-purple);
         }
         @keyframes bobDown {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(6px);
-            }
+            0%,100%{transform:translateY(0);}
+            50%{transform:translateY(6px);}
         }
-
-        /* ── Roblox Profile Button ── */
         .roblox-btn-wrap {
             width: 100%;
             display: flex;
@@ -270,7 +175,6 @@
             align-items: center;
             gap: 8px;
         }
-
         .btn-roblox {
             display: flex;
             align-items: center;
@@ -281,102 +185,44 @@
             font-family: var(--font-display);
             font-weight: 700;
             font-size: 1.05rem;
-            letter-spacing: 0.03em;
             color: #fff;
             background: rgba(42, 26, 74, 0.85);
             backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
             border: 1.5px solid rgba(120, 80, 255, 0.3);
             border-radius: var(--radius-btn);
             cursor: pointer;
             transition: all var(--transition);
-            box-shadow: 0 4px 24px rgba(120, 80, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.04);
             text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            user-select: none;
-            -webkit-touch-callout: none;
-        }
-        .btn-roblox::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: var(--radius-btn);
-            padding: 1.5px;
-            background: linear-gradient(135deg, rgba(120, 80, 255, 0.4), transparent 50%, rgba(74, 122, 255, 0.3));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            opacity: 0.6;
-            transition: opacity var(--transition);
+            text-align: center;
         }
         .btn-roblox:hover {
             transform: translateY(-2px);
             background: rgba(53, 34, 90, 0.9);
             border-color: rgba(120, 80, 255, 0.5);
-            box-shadow: 0 8px 40px rgba(120, 80, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
         }
-        .btn-roblox:active {
-            transform: scale(0.97);
-            transition-duration: 0.08s;
-        }
-        .btn-roblox .icon {
-            font-size: 1.5rem;
-            line-height: 1;
-            filter: drop-shadow(0 0 8px rgba(120, 80, 255, 0.3));
-        }
-
+        .btn-roblox .icon { font-size: 1.5rem; }
         .btn-subnote {
             font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 0.04em;
             color: var(--text-muted);
             text-align: center;
-            padding: 0 4px;
-            line-height: 1.4;
-            opacity: 0.8;
-            margin-top: -2px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
-
-        /* ── OR Divider ── */
         .divider-or {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
             padding: 2px 0;
-            font-family: var(--font-body);
-            font-weight: 500;
             font-size: 0.75rem;
-            letter-spacing: 0.12em;
             color: var(--text-muted);
-            text-transform: uppercase;
             gap: 10px;
-            user-select: none;
         }
         .divider-or .line {
             flex: 1;
             max-width: 60px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(120, 80, 255, 0.25), transparent);
+            background: linear-gradient(90deg, transparent, rgba(120,80,255,0.25), transparent);
         }
-        .divider-or .line:first-child {
-            background: linear-gradient(90deg, transparent, rgba(120, 80, 255, 0.25));
-        }
-        .divider-or .line:last-child {
-            background: linear-gradient(90deg, rgba(120, 80, 255, 0.25), transparent);
-        }
-        .divider-or .or-text {
-            padding: 0 4px;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-        }
-
-        /* ── Copy Button ── */
         .btn-copy {
             display: flex;
             align-items: center;
@@ -387,127 +233,72 @@
             font-family: var(--font-body);
             font-weight: 600;
             font-size: 0.95rem;
-            letter-spacing: 0.02em;
             color: var(--text-primary);
             background: rgba(20, 16, 31, 0.7);
             backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
             border: 1.5px solid rgba(120, 80, 255, 0.15);
             border-radius: var(--radius-btn);
             cursor: pointer;
             transition: all var(--transition);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            user-select: none;
-            -webkit-touch-callout: none;
         }
         .btn-copy:hover {
             background: rgba(30, 24, 50, 0.8);
             border-color: rgba(120, 80, 255, 0.3);
             transform: translateY(-1px);
-            box-shadow: 0 6px 30px rgba(120, 80, 255, 0.08);
         }
-        .btn-copy:active {
-            transform: scale(0.97);
-            transition-duration: 0.08s;
-        }
-        .btn-copy .copy-icon {
-            font-size: 1.3rem;
-            line-height: 1;
-            opacity: 0.7;
-        }
-        .btn-copy .label {
-            font-weight: 500;
-        }
-        .btn-copy .label strong {
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        /* ── QR Section ── */
         .qr-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
-            padding: 6px 0 4px;
             gap: 10px;
+            width: 100%;
+            padding: 6px 0;
         }
         .qr-section .qr-image {
             width: 180px;
             max-width: 65%;
-            height: auto;
             aspect-ratio: 1/1;
             border-radius: 16px;
-            background: rgba(14, 10, 26, 0.7);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            background: rgba(14,10,26,0.7);
             padding: 8px;
-            border: 1px solid rgba(120, 80, 255, 0.12);
-            box-shadow: 0 0 30px rgba(120, 80, 255, 0.04);
-            transition: box-shadow var(--transition), border-color var(--transition);
-            display: block;
-        }
-        .qr-section .qr-image:hover {
-            border-color: rgba(120, 80, 255, 0.25);
-            box-shadow: 0 0 40px rgba(120, 80, 255, 0.08);
+            border: 1px solid rgba(120,80,255,0.12);
         }
         .qr-section .qr-image img {
             width: 100%;
             height: 100%;
-            display: block;
             border-radius: 10px;
             background: #fff;
         }
         .qr-label {
-            font-family: var(--font-body);
-            font-weight: 400;
             font-size: 0.7rem;
-            letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--text-muted);
             opacity: 0.7;
-            text-align: center;
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
-
-        /* ── Toast / Notification ── */
         .toast {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(80px);
-            background: rgba(20, 16, 31, 0.95);
+            background: rgba(20,16,31,0.95);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             padding: 14px 24px;
             border-radius: 14px;
-            border: 1px solid rgba(120, 80, 255, 0.25);
-            box-shadow: 0 8px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(120, 80, 255, 0.06);
+            border: 1px solid rgba(120,80,255,0.25);
             color: var(--text-primary);
-            font-family: var(--font-body);
-            font-weight: 500;
             font-size: 0.85rem;
-            text-align: center;
-            max-width: 90%;
-            width: auto;
             z-index: 9999;
             opacity: 0;
-            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: opacity 0.4s, transform 0.4s;
             pointer-events: none;
             white-space: nowrap;
-            letter-spacing: 0.01em;
         }
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
             pointer-events: auto;
         }
-        .toast .toast-icon {
-            margin-right: 8px;
-        }
-
-        /* ── VIDEO MODAL ── */
         .video-modal {
             position: fixed;
             inset: 0;
@@ -515,12 +306,11 @@
             display: none;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0,0,0,0.85);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             padding: 20px;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s;
         }
         .video-modal.open {
             display: flex;
@@ -530,278 +320,40 @@
             position: absolute;
             top: 20px;
             right: 24px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 50%;
             width: 44px;
             height: 44px;
+            font-size: 1.6rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s;
+            line-height: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
-            font-weight: 300;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            z-index: 10;
-            line-height: 1;
-            padding: 0;
         }
         .video-modal .modal-close:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255,255,255,0.15);
             transform: rotate(90deg);
-            border-color: rgba(255, 255, 255, 0.3);
         }
         .video-modal .modal-video-wrapper {
             position: relative;
             width: 90%;
             max-width: 900px;
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 16/9;
             border-radius: var(--radius-video);
             overflow: hidden;
-            box-shadow: 0 0 60px rgba(120, 80, 255, 0.2), 0 0 120px rgba(120, 80, 255, 0.05);
-            border: 2px solid rgba(120, 80, 255, 0.3);
+            border: 2px solid rgba(120,80,255,0.3);
             background: #000;
         }
-        .video-modal .modal-video-wrapper video {
+        .video-modal .modal-video-wrapper iframe {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            border: none;
             display: block;
         }
-
-        /* ── Responsive ── */
-        @media (max-width: 430px) {
-            body {
-                padding: 16px 14px 32px;
-            }
-            .video-wrapper {
-                border-radius: 16px;
-            }
-            .video-wrapper::after {
-                border-radius: 16px;
-            }
-            .profile-title {
-                font-size: 0.75rem;
-                margin-top: 10px;
-            }
-            .btn-roblox {
-                font-size: 0.9rem;
-                padding: 18px 14px;
-            }
-            .btn-copy {
-                font-size: 0.85rem;
-                padding: 18px 14px;
-            }
-            .join-cta .btn-join {
-                font-size: 0.85rem;
-                padding: 14px 16px;
-            }
-            .qr-section .qr-image {
-                width: 150px;
-                max-width: 60%;
-            }
-            .toast {
-                font-size: 0.75rem;
-                padding: 12px 18px;
-                white-space: normal;
-                max-width: 92%;
-            }
-            .video-modal .modal-close {
-                top: 12px;
-                right: 16px;
-                width: 36px;
-                height: 36px;
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (max-width: 375px) {
-            body {
-                padding: 12px 10px 28px;
-            }
-            .video-wrapper {
-                border-radius: 14px;
-            }
-            .video-wrapper::after {
-                border-radius: 14px;
-            }
-            .profile-title {
-                font-size: 0.65rem;
-                margin-top: 8px;
-            }
-            .btn-roblox {
-                font-size: 0.8rem;
-                padding: 16px 12px;
-                gap: 8px;
-            }
-            .btn-roblox .icon {
-                font-size: 1.2rem;
-            }
-            .btn-copy {
-                font-size: 0.75rem;
-                padding: 16px 12px;
-                gap: 8px;
-            }
-            .join-cta .btn-join {
-                font-size: 0.75rem;
-                padding: 12px 14px;
-                gap: 6px;
-            }
-            .join-cta .btn-join .arrow {
-                font-size: 1rem;
-            }
-            .divider-or {
-                font-size: 0.6rem;
-            }
-            .divider-or .line {
-                max-width: 40px;
-            }
-            .qr-section .qr-image {
-                width: 130px;
-                max-width: 55%;
-                padding: 6px;
-            }
-            .btn-subnote {
-                font-size: 0.6rem;
-            }
-            .qr-label {
-                font-size: 0.6rem;
-            }
-            .toast {
-                font-size: 0.7rem;
-                padding: 10px 14px;
-                bottom: 20px;
-            }
-            .video-modal .modal-close {
-                top: 10px;
-                right: 12px;
-                width: 32px;
-                height: 32px;
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 320px) {
-            body {
-                padding: 10px 8px 24px;
-            }
-            .video-wrapper {
-                border-radius: 12px;
-            }
-            .video-wrapper::after {
-                border-radius: 12px;
-            }
-            .profile-title {
-                font-size: 0.6rem;
-                margin-top: 6px;
-            }
-            .btn-roblox {
-                font-size: 0.7rem;
-                padding: 14px 10px;
-                gap: 6px;
-                border-radius: 12px;
-            }
-            .btn-roblox .icon {
-                font-size: 1rem;
-            }
-            .btn-copy {
-                font-size: 0.65rem;
-                padding: 14px 10px;
-                gap: 6px;
-                border-radius: 12px;
-            }
-            .join-cta .btn-join {
-                font-size: 0.65rem;
-                padding: 10px 12px;
-                gap: 4px;
-                border-radius: 12px;
-            }
-            .join-cta .btn-join .arrow {
-                font-size: 0.9rem;
-            }
-            .divider-or {
-                font-size: 0.55rem;
-                gap: 6px;
-            }
-            .divider-or .line {
-                max-width: 30px;
-            }
-            .qr-section .qr-image {
-                width: 110px;
-                max-width: 50%;
-                padding: 4px;
-                border-radius: 12px;
-            }
-            .btn-subnote {
-                font-size: 0.55rem;
-            }
-            .qr-label {
-                font-size: 0.55rem;
-            }
-            .container {
-                gap: 14px;
-            }
-            .toast {
-                font-size: 0.6rem;
-                padding: 8px 12px;
-                bottom: 16px;
-                max-width: 96%;
-            }
-            .video-modal .modal-close {
-                top: 8px;
-                right: 10px;
-                width: 28px;
-                height: 28px;
-                font-size: 1rem;
-            }
-        }
-
-        /* ── Desktop tweaks ── */
-        @media (min-width: 600px) {
-            body {
-                padding: 40px 20px 60px;
-                align-items: center;
-            }
-            .container {
-                max-width: 460px;
-            }
-            .video-wrapper {
-                max-width: 600px;
-            }
-            .profile-title {
-                font-size: 0.95rem;
-            }
-            .btn-roblox {
-                font-size: 1.1rem;
-                padding: 22px 24px;
-            }
-            .btn-copy {
-                font-size: 1rem;
-                padding: 22px 24px;
-            }
-            .join-cta .btn-join {
-                font-size: 1.05rem;
-                padding: 18px 24px;
-            }
-            .qr-section .qr-image {
-                width: 200px;
-                max-width: 50%;
-            }
-        }
-
-        /* ── Utilities ── */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
-
         .copy-fallback {
             position: absolute;
             left: -9999px;
@@ -811,58 +363,58 @@
             width: 1px;
             height: 1px;
         }
+        @media (max-width:430px) {
+            .video-wrapper::before { font-size:3rem; }
+            .video-modal .modal-close { top:12px; right:16px; width:36px; height:36px; font-size:1.3rem; }
+        }
+        @media (max-width:375px) {
+            .video-wrapper::before { font-size:2.5rem; }
+        }
+        @media (max-width:320px) {
+            .video-wrapper::before { font-size:2rem; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ═══ SPARKLES ═══ -->
-    <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+    <div class="sparkles" id="sparkles"></div>
 
-    <!-- ═══ TOAST ═══ -->
-    <div class="toast" id="toast" role="alert" aria-live="polite">
+    <div class="toast" id="toast">
         <span class="toast-icon">✅</span>
         <span id="toastMessage">Already Copied! Paste it On any Browser and join</span>
     </div>
 
-    <!-- ═══ VIDEO MODAL ═══ -->
-    <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Tutorial video">
-        <button class="modal-close" id="modalClose" aria-label="Close video">&times;</button>
+    <!-- VIDEO MODAL (Vimeo) -->
+    <div class="video-modal" id="videoModal">
+        <button class="modal-close" id="modalClose">&times;</button>
         <div class="modal-video-wrapper">
-            <video id="modalVideo" controls autoplay playsinline muted>
-                <source src="https://media.discordapp.net/attachments/1531657827859566795/1545666827042947082/ChatGPT_Image_Sep_5_2026_12_18_23_PM.png?ex=6a9cf9e8&is=6a9ba868&hm=d7d73d99c656bde61b8f725b29694fb4d114891879e3cbef85be7f3f738a2bf1&=&format=webp&quality=lossless&width=1024&height=1024" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
+            <iframe
+                id="vimeoIframe"
+                src=""
+                allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+                title="Tutorial video"
+            ></iframe>
         </div>
     </div>
 
-    <!-- ═══ MAIN CONTAINER ═══ -->
     <main class="container">
 
-        <!-- ── Profile Section ── -->
-        <section class="profile-section" aria-label="Profile and tutorial">
-            <!-- Clickable video wrapper (opens modal) -->
-            <div class="video-wrapper" id="videoTrigger" role="button" tabindex="0" aria-label="Play tutorial video">
-                <video
-                    id="mainVideo"
-                    autoplay
-                    loop
-                    muted
-                    playsinline
-                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%2314101f'/%3E%3Ccircle cx='100' cy='100' r='60' fill='%237c5cfc' opacity='0.15'/%3E%3Cpath d='M80 70 L80 130 L130 100 Z' fill='%237c5cfc' opacity='0.4'/%3E%3C/svg%3E"
-                >
-                    <!-- Replace the src with your own tutorial video -->
-                    <source src="https://media.discordapp.net/attachments/1531657827859566795/1545666827042947082/ChatGPT_Image_Sep_5_2026_12_18_23_PM.png?ex=6a9cf9e8&is=6a9ba868&hm=d7d73d99c656bde61b8f725b29694fb4d114891879e3cbef85be7f3f738a2bf1&=&format=webp&quality=lossless&width=1024&height=1024" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
+        <section class="profile-section">
+            <div class="video-wrapper" id="videoTrigger" role="button" tabindex="0">
+                <!-- Thumbnail: Puwede ninyong palitan ng sarili ninyong image -->
+                <img
+                    src="https://img.youtube.com/vi/6j3gtdkrKIA/hqdefault.jpg"
+                    alt="Tutorial video thumbnail"
+                    loading="lazy"
+                />
             </div>
-
-            <!-- NEW: Smaller text -->
             <h1 class="profile-title">
                 how to join? <span>watch the video tutorial</span>
             </h1>
         </section>
 
-        <!-- ── JOIN ME BELOW ── -->
         <div class="join-cta">
             <div class="btn-join" aria-hidden="true">
                 JOIN ME BELOW
@@ -870,57 +422,35 @@
             </div>
         </div>
 
-        <!-- ── ROBLOX PROFILE BUTTON ── -->
         <div class="roblox-btn-wrap">
-            <a
-                class="btn-roblox"
-                id="robloxProfileBtn"
-                href="https://bio.site/Ilovebacons"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open my Roblox profile in a new tab"
-            >
+            <a class="btn-roblox" href="https://bio.site/Ilovebacons" target="_blank" rel="noopener noreferrer">
                 <span class="icon">🎮</span>
                 MY ROBLOX PROFILE
             </a>
-            <div class="btn-subnote">
-                to join watch the video tutorial above
-            </div>
+            <div class="btn-subnote">to join watch the video tutorial above</div>
         </div>
 
-        <!-- ── OR DIVIDER 1 ── -->
         <div class="divider-or" aria-hidden="true">
             <span class="line"></span>
             <span class="or-text">OR</span>
             <span class="line"></span>
         </div>
 
-        <!-- ── COPY PROFILE LINK BUTTON ── -->
-        <button class="btn-copy" id="copyBtn" aria-label="Copy my Roblox profile link to clipboard">
+        <button class="btn-copy" id="copyBtn">
             <span class="copy-icon">📋</span>
             <span class="label"><strong>MY ROBLOX</strong> PROFILE LINK</span>
         </button>
+        <input class="copy-fallback" id="copyFallback" type="text" value="https://bio.site/Ilovebacons" readonly />
 
-        <!-- hidden fallback input for copy -->
-        <input class="copy-fallback" id="copyFallback" type="text" value="https://bio.site/Ilovebacons" readonly aria-hidden="true" />
-
-        <!-- ── OR DIVIDER 2 ── -->
         <div class="divider-or" aria-hidden="true">
             <span class="line"></span>
             <span class="or-text">OR</span>
             <span class="line"></span>
         </div>
 
-        <!-- ── QR CODE SECTION ── -->
-        <section class="qr-section" aria-label="QR code to join">
+        <section class="qr-section">
             <div class="qr-image">
-                <img
-                    src="https://media.bio.site/sites/ee51f088-2ab5-49e6-ae44-8e3e7905838a/drafts/c4C2hzTgf8WskbHJFU8Mye.png"
-                    alt="QR code to scan and join my Roblox profile"
-                    width="300"
-                    height="300"
-                    loading="lazy"
-                />
+                <img src="https://media.bio.site/sites/ee51f088-2ab5-49e6-ae44-8e3e7905838a/drafts/c4C2hzTgf8WskbHJFU8Mye.png" alt="QR code" loading="lazy" />
             </div>
             <div class="qr-label">scan the qr to join</div>
         </section>
@@ -931,32 +461,29 @@
         (function() {
             'use strict';
 
-            // ── Config ──
             const PROFILE_URL = 'https://bio.site/Ilovebacons';
-            const TOAST_DURATION = 3200; // ms
+            const TOAST_DURATION = 3200;
 
-            // ── DOM refs ──
+            // ═══════════════════════════════════════════════════════
+            // ✅ NAKASET NA ANG IYONG VIMEO VIDEO ID
+            const VIMEO_ID = '1224187524';
+            // ═══════════════════════════════════════════════════════
+
             const copyBtn = document.getElementById('copyBtn');
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toastMessage');
             const fallbackInput = document.getElementById('copyFallback');
 
-            // Video Modal refs
             const videoTrigger = document.getElementById('videoTrigger');
             const videoModal = document.getElementById('videoModal');
             const modalClose = document.getElementById('modalClose');
-            const modalVideo = document.getElementById('modalVideo');
-            const mainVideo = document.getElementById('mainVideo');
+            const vimeoIframe = document.getElementById('vimeoIframe');
 
-            // ── Toast helpers ──
             let toastTimer = null;
 
-            function showToast(message) {
-                if (toastTimer) {
-                    clearTimeout(toastTimer);
-                    toastTimer = null;
-                }
-                toastMsg.textContent = message || 'Already Copied! Paste it On any Browser and join';
+            function showToast(msg) {
+                if (toastTimer) clearTimeout(toastTimer);
+                toastMsg.textContent = msg || 'Already Copied! Paste it On any Browser and join';
                 toast.classList.add('show');
                 toastTimer = setTimeout(() => {
                     toast.classList.remove('show');
@@ -965,25 +492,16 @@
             }
 
             function hideToast() {
-                if (toastTimer) {
-                    clearTimeout(toastTimer);
-                    toastTimer = null;
-                }
+                if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
                 toast.classList.remove('show');
             }
 
-            // ── Copy logic ──
             function copyProfileLink() {
                 hideToast();
-
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(PROFILE_URL)
-                        .then(() => {
-                            showToast('Already Copied! Paste it On any Browser and join');
-                        })
-                        .catch(() => {
-                            fallbackCopy();
-                        });
+                        .then(() => showToast('Already Copied! Paste it On any Browser and join'))
+                        .catch(() => fallbackCopy());
                     return;
                 }
                 fallbackCopy();
@@ -994,9 +512,7 @@
                     fallbackInput.value = PROFILE_URL;
                     fallbackInput.select();
                     fallbackInput.setSelectionRange(0, 99999);
-
-                    const success = document.execCommand('copy');
-                    if (success) {
+                    if (document.execCommand('copy')) {
                         showToast('Already Copied! Paste it On any Browser and join');
                     } else {
                         manualCopyFallback();
@@ -1004,107 +520,64 @@
                 } catch (e) {
                     manualCopyFallback();
                 }
-                if (window.getSelection) {
-                    window.getSelection().removeAllRanges();
-                }
+                if (window.getSelection) window.getSelection().removeAllRanges();
                 fallbackInput.blur();
             }
 
             function manualCopyFallback() {
-                const msg = `Copy this link: ${PROFILE_URL}`;
-                showToast(msg);
+                showToast(`Copy this link: ${PROFILE_URL}`);
                 console.log('Manual copy needed:', PROFILE_URL);
             }
 
-            // ── Video Modal Logic ──
             function openModal() {
-                const currentSrc = mainVideo.querySelector('source')?.getAttribute('src') || '';
-                const modalSource = modalVideo.querySelector('source');
-                if (modalSource) {
-                    modalSource.setAttribute('src', currentSrc);
-                }
-                modalVideo.load();
-                modalVideo.play().catch(() => {});
+                // Vimeo embed URL with autoplay
+                vimeoIframe.src = `https://player.vimeo.com/video/${VIMEO_ID}?autoplay=1&title=0&byline=0&portrait=0`;
                 videoModal.classList.add('open');
                 document.body.style.overflow = 'hidden';
             }
 
             function closeModal() {
                 videoModal.classList.remove('open');
-                modalVideo.pause();
-                const modalSource = modalVideo.querySelector('source');
-                if (modalSource) {
-                    modalSource.removeAttribute('src');
-                }
-                modalVideo.load();
+                vimeoIframe.src = '';
                 document.body.style.overflow = '';
             }
 
             videoTrigger.addEventListener('click', openModal);
-            videoTrigger.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    openModal();
-                }
+            videoTrigger.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); }
             });
 
             modalClose.addEventListener('click', closeModal);
-
-            videoModal.addEventListener('click', function(e) {
-                if (e.target === videoModal) {
-                    closeModal();
-                }
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && videoModal.classList.contains('open')) closeModal();
             });
 
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && videoModal.classList.contains('open')) {
-                    closeModal();
-                }
+            copyBtn.addEventListener('click', (e) => { e.preventDefault(); copyProfileLink(); });
+            copyBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copyProfileLink(); }
             });
 
-            copyBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                copyProfileLink();
-            });
+            toast.addEventListener('click', hideToast);
 
-            copyBtn.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    copyProfileLink();
-                }
-            });
-
-            toast.addEventListener('click', function() {
-                hideToast();
-            });
-
+            // Sparkles
             function generateSparkles() {
                 const container = document.getElementById('sparkles');
-                const count = 45;
-                for (let i = 0; i < count; i++) {
+                for (let i = 0; i < 45; i++) {
                     const el = document.createElement('div');
                     el.className = 'sparkle';
-                    const x = Math.random() * 100;
-                    const y = Math.random() * 100;
+                    const x = Math.random() * 100, y = Math.random() * 100;
                     const size = 1.5 + Math.random() * 3;
-                    const dur = 3 + Math.random() * 5;
-                    const delay = Math.random() * 6;
-                    el.style.cssText = `
-                        left: ${x}%;
-                        top: ${y}%;
-                        width: ${size}px;
-                        height: ${size}px;
-                        --dur: ${dur}s;
-                        animation-delay: ${delay}s;
-                        opacity: ${0.2 + Math.random() * 0.5};
-                    `;
+                    const dur = 3 + Math.random() * 5, delay = Math.random() * 6;
+                    el.style.cssText = `left:${x}%;top:${y}%;width:${size}px;height:${size}px;--dur:${dur}s;animation-delay:${delay}s;opacity:${0.2+Math.random()*0.5};`;
                     container.appendChild(el);
                 }
             }
             generateSparkles();
 
-            console.log('🚀 Roblox Join Page ready. Profile URL:', PROFILE_URL);
-
+            console.log('🚀 Roblox Join Page ready. Vimeo ID:', VIMEO_ID);
         })();
     </script>
 
