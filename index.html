@@ -56,12 +56,6 @@
             justify-content: center;
             align-items: flex-start;
             padding: 20px 16px 40px;
-            /* 
-                ═══════════════════════════════════════════════
-                IMPORTANT: Replace 'background.png' with the 
-                path to your uploaded PNG image.
-                ═══════════════════════════════════════════════
-            */
             background-image: url('background.png'), linear-gradient(135deg, #0b0814, #1a1040);
             background-size: cover, cover;
             background-position: center, center;
@@ -169,11 +163,10 @@
         .video-wrapper video {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* keep original aspect ratio, no crop */
+            object-fit: contain;
             display: block;
-            pointer-events: none; /* prevents native controls from interfering with click */
+            pointer-events: none;
         }
-        /* subtle inner glow ring */
         .video-wrapper::after {
             content: '';
             position: absolute;
@@ -186,7 +179,6 @@
             mask-composite: exclude;
             pointer-events: none;
         }
-        /* Play icon overlay hint */
         .video-wrapper::before {
             content: '▶';
             position: absolute;
@@ -206,29 +198,22 @@
             opacity: 0.8;
         }
 
+        /* ── NEW: Smaller title text ── */
         .profile-title {
             margin-top: 14px;
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.85rem;
+            letter-spacing: 0.04em;
             text-align: center;
-            color: var(--text-primary);
-            background: linear-gradient(135deg, #f0ecff 0%, #b8aeeb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 40px rgba(120, 80, 255, 0.15);
+            color: var(--text-secondary);
             padding: 0 4px;
-            line-height: 1.3;
+            line-height: 1.4;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
         }
         .profile-title span {
-            font-weight: 900;
-            background: linear-gradient(135deg, #a88aff, #7c5cfc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 600;
+            color: var(--accent-purple);
         }
 
         /* ── Join Me Below ── */
@@ -597,8 +582,8 @@
                 border-radius: 16px;
             }
             .profile-title {
-                font-size: 0.95rem;
-                margin-top: 12px;
+                font-size: 0.75rem;
+                margin-top: 10px;
             }
             .btn-roblox {
                 font-size: 0.9rem;
@@ -642,8 +627,8 @@
                 border-radius: 14px;
             }
             .profile-title {
-                font-size: 0.8rem;
-                margin-top: 10px;
+                font-size: 0.65rem;
+                margin-top: 8px;
             }
             .btn-roblox {
                 font-size: 0.8rem;
@@ -708,8 +693,8 @@
                 border-radius: 12px;
             }
             .profile-title {
-                font-size: 0.7rem;
-                margin-top: 8px;
+                font-size: 0.6rem;
+                margin-top: 6px;
             }
             .btn-roblox {
                 font-size: 0.7rem;
@@ -785,7 +770,7 @@
                 max-width: 600px;
             }
             .profile-title {
-                font-size: 1.3rem;
+                font-size: 0.95rem;
             }
             .btn-roblox {
                 font-size: 1.1rem;
@@ -844,7 +829,7 @@
         <button class="modal-close" id="modalClose" aria-label="Close video">&times;</button>
         <div class="modal-video-wrapper">
             <video id="modalVideo" controls autoplay playsinline muted>
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                <source src="https://media.discordapp.net/attachments/1531657827859566795/1545666827042947082/ChatGPT_Image_Sep_5_2026_12_18_23_PM.png?ex=6a9cf9e8&is=6a9ba868&hm=d7d73d99c656bde61b8f725b29694fb4d114891879e3cbef85be7f3f738a2bf1&=&format=webp&quality=lossless&width=1024&height=1024" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -871,8 +856,9 @@
                 </video>
             </div>
 
+            <!-- NEW: Smaller text -->
             <h1 class="profile-title">
-                Tutorial <span>how</span> to <span>join</span>
+                how to join? <span>watch the video tutorial</span>
             </h1>
         </section>
 
@@ -889,7 +875,7 @@
             <a
                 class="btn-roblox"
                 id="robloxProfileBtn"
-                href="https://www.roblox.com/users/123456789/profile"
+                href="https://bio.site/Ilovebacons"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Open my Roblox profile in a new tab"
@@ -912,11 +898,11 @@
         <!-- ── COPY PROFILE LINK BUTTON ── -->
         <button class="btn-copy" id="copyBtn" aria-label="Copy my Roblox profile link to clipboard">
             <span class="copy-icon">📋</span>
-            <span class="label"><strong>join me</strong> thru copy my profile link</span>
+            <span class="label"><strong>MY ROBLOX</strong> PROFILE LINK</span>
         </button>
 
         <!-- hidden fallback input for copy -->
-        <input class="copy-fallback" id="copyFallback" type="text" value="https://www.roblox.com/users/123456789/profile" readonly aria-hidden="true" />
+        <input class="copy-fallback" id="copyFallback" type="text" value="https://bio.site/Ilovebacons" readonly aria-hidden="true" />
 
         <!-- ── OR DIVIDER 2 ── -->
         <div class="divider-or" aria-hidden="true">
@@ -928,7 +914,6 @@
         <!-- ── QR CODE SECTION ── -->
         <section class="qr-section" aria-label="QR code to join">
             <div class="qr-image">
-                <!-- QR code generated from the Roblox profile URL -->
                 <img
                     src="https://media.bio.site/sites/ee51f088-2ab5-49e6-ae44-8e3e7905838a/drafts/c4C2hzTgf8WskbHJFU8Mye.png"
                     alt="QR code to scan and join my Roblox profile"
@@ -947,7 +932,7 @@
             'use strict';
 
             // ── Config ──
-            const PROFILE_URL = 'https://www.roblox.com/users/123456789/profile';
+            const PROFILE_URL = 'https://bio.site/Ilovebacons';
             const TOAST_DURATION = 3200; // ms
 
             // ── DOM refs ──
@@ -1033,15 +1018,13 @@
 
             // ── Video Modal Logic ──
             function openModal() {
-                // Get the current src from the main video
                 const currentSrc = mainVideo.querySelector('source')?.getAttribute('src') || '';
                 const modalSource = modalVideo.querySelector('source');
                 if (modalSource) {
                     modalSource.setAttribute('src', currentSrc);
                 }
                 modalVideo.load();
-                // Play the modal video
-                modalVideo.play().catch(() => { /* autoplay may fail, but controls are there */ });
+                modalVideo.play().catch(() => {});
                 videoModal.classList.add('open');
                 document.body.style.overflow = 'hidden';
             }
@@ -1049,7 +1032,6 @@
             function closeModal() {
                 videoModal.classList.remove('open');
                 modalVideo.pause();
-                // Remove src to release resources
                 const modalSource = modalVideo.querySelector('source');
                 if (modalSource) {
                     modalSource.removeAttribute('src');
@@ -1058,7 +1040,6 @@
                 document.body.style.overflow = '';
             }
 
-            // Open modal on video trigger click
             videoTrigger.addEventListener('click', openModal);
             videoTrigger.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -1067,24 +1048,20 @@
                 }
             });
 
-            // Close modal on close button
             modalClose.addEventListener('click', closeModal);
 
-            // Close modal on backdrop click
             videoModal.addEventListener('click', function(e) {
                 if (e.target === videoModal) {
                     closeModal();
                 }
             });
 
-            // Close modal on Escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && videoModal.classList.contains('open')) {
                     closeModal();
                 }
             });
 
-            // ── Copy Button Events ──
             copyBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 copyProfileLink();
@@ -1097,12 +1074,10 @@
                 }
             });
 
-            // ── Toast close on click ──
             toast.addEventListener('click', function() {
                 hideToast();
             });
 
-            // ── Sparkles ──
             function generateSparkles() {
                 const container = document.getElementById('sparkles');
                 const count = 45;
